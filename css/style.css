@@ -75,7 +75,7 @@ div#image_tooth_simulation > img {
     position: relative;
     display: block;
     width: 100%;
-    /*opacity: 0.4;*/
+    opacity: 0.4;
 }
 
 div#option_rubber div#higher_ID, div#option_rubber div#bottom_ID {
@@ -89,7 +89,7 @@ div#option_rubber div#higher_ID div, div#option_rubber div#bottom_ID  div{
     display: inline-block;
     width: 20px;
     height: 20px;
-    background-color: rgb(253, 253, 255);
+    background-color: rgb(4, 4, 5);
     color: white;
     top: 0px;
 }
