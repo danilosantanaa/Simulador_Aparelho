@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Simulador de aparelho</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <div id="simulation">
+        <h2>Simulador de Aparelho</h2>
+
+        <!-- Aqui mostra as opção de cores -->
+        <div id="option_color">
+
+            <!-- Aqui irá mostrar a paleta de cores -->
+            <div class="option">
+                <div id="palette"></div>
+            </div>
+            
+            <!-- Aqui irá mostrar as opção que o usuário poderá colorir as borrachas -->
+            <div class="option">
+                <div id="tooth_appliance_region"></div>
+            </div>
+
+        </div> 
+
+        <!-- Aqui carrega a imagens do aparelho de dente -->
+        <p>Basta selecionar a cor e depois apertar nas opção que deseja colorir</p>
+        <div id="image_tooth_simulation">
+            <img src="img/aparelho.png" alt="Simulador de aparelho">
+            <!-- Aqui é a região da borracha do bracket -->
+            <div id="option_rubber">
+                <!-- Aqui é onde fica a camada superior -->
+                <div id="higher_ID"></div>
+
+                <!-- Aqui é onde fica a camada inferior -->
+                <div id="bottom_ID"></div>
+            </div>
+        </div>
+    </div>
+    <script>
+    // Carregando a div para colocar as opcao de cores 
+    let div_option_color = document.querySelector("#palette");
+    let div_tooth_appliance_region = document.querySelector("#tooth_appliance_region");
+
+    // Pegando o elemento div que irá representar as borrachas
+    let div_higher_ID = document.querySelector("#higher_ID");
+    let div_bottom_ID = document.querySelector("#bottom_ID");
+
+
+    // Criando os objeto para a manipulacao do simulador
+    var MySimulator = {
+
+        // Atributos
+        selected_color: undefined,
+        lists_color: {
+            yellow: "#FFEA02", // Amarelo
+            lilac: "#c8a2c8", // Lilás
+            orange: "#FF5100", // Laranja
+            rose: "#FF86B7", // Rosa
+            purple: "#993399", // Roxo 
+            grape: "#CE27BD", // Uva
+            green: "#2FB15D", // Verde
+            pearl_green: "#0A705C", // Verde Perola
+            green_lemon: "#B6E908", // Verde Limão
+            grey: "#72756B", // Cinza
+            blue: "#008FE9", // Azul
+            white: "#FFFFFF", // Branco
+            red: "#FF0101", // Vermelho
+            black: "#000000" // Preto
+        },
+        tooth_appliance_region: [ 
+            "Todas",
+            "Superiores",
+            "Inferiores",
+            "Pares",
+            "Impares"
+        ],
+
+        // Manipulação da interface
+        interface: { 
+            // Metodo responsavel por carregar as cores na DIV
+            loadColor(){
+                /*
+                * Aqui irá manipular a DOM do HTML para que possar colocar as colores dinamicamente
+                */
+                let pos_div = 0; // Variável para contar as posição da divs
+
+                for(list_color in MySimulator.lists_color){
+                   let div = MySimulator.interface.addElements("div", div_option_color, {
+                       class: "color_bracket",
+                       onclick: `MySimulator.action.selectColor('${list_color}', ${pos_div})`
+                   });
+                  
+                   // Mudando a propriedade style da tag
+                   div.style.background = MySimulator.lists_color[list_color]; 
+
+                   pos_div++;
+                }
+            },
+
+            // Metodo responsável por mostrar as opção onde a cor será aplicada
+            loadToothApplianceRegion(){
+                for(region in MySimulator.tooth_appliance_region){
+
+                    let div_region_option = MySimulator.interface.addElements("div", div_tooth_appliance_region, {
+                        class: "region_tooth",
+                        onclick: `MySimulator.action.buttom('${region}')`
+                    });
+
+                    div_region_option.innerHTML = MySimulator.tooth_appliance_region[region];
+
+                }
+            },
+
+            // Metodo para criar elementos e adicionar na DOM
+            addElements(element, tagDad, atrributes = []){
+                let child = document.createElement(element);
+                // Adicionando os atributos na tags quando for necessarios
+                for(atrribute in atrributes){
+                    child.setAttribute(atrribute, atrributes[atrribute]);
+                }
+                tagDad.appendChild(child);
+
+                return child;
+            },
+
+            // Metodo para adicionar elementos na parte superior dos dentes
+            addHigherRubber (){
+                return MySimulator.interface.addElements("div", div_higher_ID, {
+                    class: "higher"
+                });
+            },
+
+            // Metodo para adicionar elementos na parte inferior dos dentes
+            addBottomRubber(){
+                return MySimulator.interface.addElements("div", div_bottom_ID, {
+                    class: "bottom"
+                });
+            },
+
+            // Metodos que defini a posicao das borrachas
+            setRubberDirection(element, x, y, width = 30, height = 30){
+                element.style.left = `${x}px`;
+                element.style.top = `${y}px`; 
+                element.style.width = `${width}px`;
+                element.style.height = `${height}px`;
+            },
+
+            // Metodos para configurar o posicionamento das borrachas superiores
+            setHigherRubberDirection(highers, x, y, width = 30, height = 30){
+                MySimulator.interface.setRubberDirection(highers, x, y, width, height);
+            },
+
+            setBottomRubberDirection(bottom, x, y, width = 30, height = 30){
+                MySimulator.interface.setRubberDirection(bottom, x, y, width, height);
+            },
+            
+            // Carregar as borrachas dos brackets
+            rubber() {
+                let interface = MySimulator.interface;
+
+                // Fazendo a camada superior do dente
+                interface.setHigherRubberDirection(interface.addHigherRubber(), 20, 20);
+                interface.setHigherRubberDirection(interface.addHigherRubber(), 50, 30);
+                interface.setHigherRubberDirection(interface.addHigherRubber(), 92, 45);
+                interface.setHigherRubberDirection(interface.addHigherRubber(), 142, 54, 40);
+                interface.setHigherRubberDirection(interface.addHigherRubber(), 200, 54, 40);
+                interface.setHigherRubberDirection(interface.addHigherRubber(), 250, 45, 40);
+                interface.setHigherRubberDirection(interface.addHigherRubber(), 295, 40, 25);
+                interface.setHigherRubberDirection(interface.addHigherRubber(), 320, 30);
+
+                // Fazendo a camada inferiror do dente
+                interface.setBottomRubberDirection(interface.addBottomRubber(), 83, 80);
+                interface.setBottomRubberDirection(interface.addBottomRubber(), 115, 93, 40);
+                interface.setBottomRubberDirection(interface.addBottomRubber(), 158, 96);
+                interface.setBottomRubberDirection(interface.addBottomRubber(), 202, 96);
+                interface.setBottomRubberDirection(interface.addBottomRubber(), 245, 96);
+                interface.setBottomRubberDirection(interface.addBottomRubber(), 280, 88, 22, 22);
+            }
+        },
+
+        action: {
+
+            // Metodo que irá controlar os botao
+            buttom(posRegion){
+                switch(MySimulator.tooth_appliance_region[posRegion]){
+                    case "Todas":
+                        MySimulator.action.all();
+                    break;
+                    case "Superiores":
+                        MySimulator.action.higher();
+                    break;
+                    case "Inferiores":
+                        MySimulator.action.bottom();
+                    break;
+                    case "Pares":
+                        MySimulator.action.even()
+                    break;
+                    case "Impares":
+                        MySimulator.action.odd();
+
+                }
+            },
+
+            // Colocar cor em todos as borrachas
+            all(){
+                MySimulator.action.higher();
+                MySimulator.action.bottom();
+            },
+
+            // Metodo colorir as borrachas
+            colorRubber(tagTarget, color, even = false, odd = false){
+                let i = 0;
+                while(i < tagTarget.length){
+
+                    // Caso for para selecionar as borrachas pares
+                    if(even && !odd){
+                        i++;
+                    }
+
+                    tagTarget[i].style.background = color;
+
+                    if(!odd){
+                        i++;
+                    } else {
+                        i += 2;
+                    }
+
+                }
+            },
+            
+            // Metodo para colorir a parte superior do aparelho
+            higher(even = false, odd = false){
+                let div_higher = document.querySelectorAll(".higher");
+                MySimulator.action.colorRubber(div_higher, MySimulator.selected_color, even, odd);
+            },
+
+            // Metodo para colorir a parte inferir o aparelho
+            bottom(even = false, odd = false){
+                let div_bottom = document.querySelectorAll(".bottom");
+                MySimulator.action.colorRubber(div_bottom, MySimulator.selected_color, even, odd);
+            },
+
+            // Metodo para colorir a borracha par
+            even(){
+                MySimulator.action.higher(true);
+                MySimulator.action.bottom(true);
+            },
+            
+            // Metodo para colorir a borracha impar
+            odd(){
+                MySimulator.action.higher(false, true);
+                MySimulator.action.bottom(false, true);
+            },
+
+            // Metodo para selecionar a cor
+            selectColor(posColor, posDiv){
+                let div_color_bracket =  document.querySelectorAll(".color_bracket");
+                let border;
+
+                for(let pos = 0; pos < div_color_bracket.length; pos++){
+                    
+                    if(pos == posDiv){
+                        border = "4px dashed #25e7e7";
+                    }else {
+                        border = "1px solid rgba(0, 0, 0, 0.219)";
+                    }
+
+                    div_color_bracket[pos].style.border = border;
+                }
+
+                MySimulator.selected_color = MySimulator.lists_color[posColor];
+
+            }
+        },
+
+        // Metodo para carregar a aplicação
+        init(){
+            // Carregar a paleta de cor
+            MySimulator.interface.loadColor();
+
+            // Carregar as opções de colorir a região do aparelho de dente
+            MySimulator.interface.loadToothApplianceRegion();
+
+            // Carregando as borrachas 
+            MySimulator.interface.rubber();
+            
+        }
+    }
+
+
+    </script>
+    <script>
+        MySimulator.init();
+    </script>
+</body>
+</html>
