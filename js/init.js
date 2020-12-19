@@ -439,3 +439,8 @@ var MySimulator = {
         
     }
 }
+
+// Apos o carregamento do documento carregar aplicação
+document.addEventListener("DOMContentLoaded", () => {
+    MySimulator.init();
+});
