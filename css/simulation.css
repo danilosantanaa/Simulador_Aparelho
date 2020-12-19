@@ -72,5 +72,6 @@ div#image_tooth_simulation {
 
 canvas#tooth_face {
     display: block;
+    width: 100%;
     margin: auto;
 }

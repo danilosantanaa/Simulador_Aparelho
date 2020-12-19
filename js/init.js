@@ -167,8 +167,8 @@ var DrawToothAppliance = {
                 DrawToothAppliance.context.fillRect(bottom_coords[rubber].x, bottom_coords[rubber].y, bottom_coords[rubber].w, bottom_coords[rubber].h);
             }
 
-            // Desenhando a imagem da modela com aparelho de dente
-            DrawToothAppliance.context.drawImage(DrawToothAppliance.imgObject, 0, 0, DrawToothAppliance.width, DrawToothAppliance.height);
+             // Desenhando a imagem da modela com aparelho de dente
+             DrawToothAppliance.context.drawImage(DrawToothAppliance.imgObject, 0, 0, DrawToothAppliance.width, DrawToothAppliance.height);
             
             // Aplicando o desenho no canva
             DrawToothAppliance.context.stroke();
@@ -241,22 +241,56 @@ var DrawToothAppliance = {
                 y: evt.clientY - recNav.top
             };
 
-            console.log(posClick);
+            // Pegando o tamanho do elementos que aumenta dinamicamente
+            let tooth_face = document.getElementById("tooth_face");
+            let widthElement = tooth_face.clientWidth;
+            let heightElement = tooth_face.clientHeight;
 
+            /*
+            * A variável pctX e pctY fica responsável por guardar a porcentagem relativa
+            * a mudança de tamanho do elemento canvas. Isso é, o algoritmo indentifica se o plano
+            * carteseano X e Y da imagens foi mudada e com isso permite que a cor seja aplicada da forma correta.
+            * Basicamente esse algoritmo identifica onde está a borracha do aparelho de dentes.
+            */
+            let pctX =  widthElement * 100 / DrawToothAppliance.width;
+            let pctY =  heightElement * 100 / DrawToothAppliance.height;
+
+            
+            console.log("Monstrando logs...");
             // Verificando e quais borrachas a cor pode ser atendida
             for(region in DrawToothAppliance.coords_rubber){
                 // Percorrendo as superficies, tanto de cima como na parte de baixo
                 for(rubbers in DrawToothAppliance.coords_rubber[region]){
-                    // Verificando se a posicao clickada pelo usuario foi atendida
-                    let rubber = DrawToothAppliance.coords_rubber[region][rubbers];
 
-                    if(posClick.x >=  rubber.x && posClick.x <= (rubber.x + rubber.w) && posClick.y >= rubber.y && posClick.y <= (rubber.y + rubber.h)){
+                    // Variável para auxiliar na manipulação da cor
+                    let rubber = DrawToothAppliance.coords_rubber[region][rubbers];
+                    
+                    /*
+                    * O objeto "calc" faz o calculo para calcular a quantidade de mundança que houve em relação
+                    * ao valor x e y definido inicialmente. Isso permite identificar o local exato onde o usuário irá clicar 
+                    * e calcular a diferência de mudança.
+                    */
+                    calc = {
+                        x: rubber.x * pctX / 100,
+                        y: rubber.y * pctY / 100,
+                        w: rubber.w * pctX / 100,
+                        h: rubber.h * pctY / 100
+                    }
+
+                    console.log(posClick);
+                    console.log(calc);
+                    console.log("\n");
+
+                    if(posClick.x >= calc.x && posClick.x <= calc.x + calc.w && posClick.y >= calc.y && posClick.y <= calc.y + calc.h){
                         rubber.color = MySimulator.selected_color;
                         DrawToothAppliance.draw();
                     }
+                    
                 }
 
             }
+
+            console.log("-----------------------------------------------\n");
         };
     },
 
