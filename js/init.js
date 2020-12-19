@@ -6,6 +6,7 @@ let div_tooth_appliance_region = document.querySelector("#tooth_appliance_region
 var DrawToothAppliance = {
     width: 400,
     height: 200,
+    canvas: undefined, // Guarda o elemento canvas para a criação dos eventos
     context:  undefined, //document.getElementById("tooth_face").getContext("2d"), // Salva o tipo de contexo de desenho
     sourceImg: "img/aparelho.png", // O nome da imagens que representa o aparelho de dente
     imgObject: new Image(), // O Objeto de Imagens para auxiliar no desenho da imagem
@@ -146,7 +147,9 @@ var DrawToothAppliance = {
 
     // Metodo para carregar o desenho
     prepare(){
-        DrawToothAppliance.context = DrawToothAppliance.createCanvas().getContext("2d");
+        DrawToothAppliance.canvas = DrawToothAppliance.createCanvas(); // Pegando o elemento canva criado
+
+        DrawToothAppliance.context = DrawToothAppliance.canvas.getContext("2d");
 
         DrawToothAppliance.imgObject.onload = () => {
 
@@ -226,6 +229,41 @@ var DrawToothAppliance = {
     getHeight(){
         return DrawToothAppliance.height;
     },
+
+    // Evento para manipular a cor da borracha de forma  personazada pelo usuario
+    onclickCanvas(){
+        DrawToothAppliance.canvas.onclick = (evt) => {
+            let recNav = DrawToothAppliance.canvas.getBoundingClientRect();
+
+            // Capturando o click do usuario
+            posClick = {
+                x: evt.clientX - recNav.left,
+                y: evt.clientY - recNav.top
+            };
+
+            // Verificando e quais borrachas a cor pode ser atendida
+            for(region in DrawToothAppliance.coords_rubber){
+                // Percorrendo as superficies, tanto de cima como na parte de baixo
+                for(rubbers in DrawToothAppliance.coords_rubber[region]){
+                    // Verificando se a posicao clickada pelo usuario foi atendida
+                    let rubber = DrawToothAppliance.coords_rubber[region][rubbers];
+
+                    if(posClick.x >=  rubber.x && posClick.x <= (rubber.x + rubber.w) && posClick.y >= rubber.y && posClick.y <= (rubber.y + rubber.h)){
+                        rubber.color = MySimulator.selected_color;
+                        DrawToothAppliance.draw();
+                    }
+                }
+            }
+        };
+    },
+
+    // Metodo para cerragar todas configuração
+    draw(){
+        DrawToothAppliance.prepare();
+        DrawToothAppliance.onclickCanvas("Ola");
+    }
+
+
 }
 
 
@@ -335,33 +373,33 @@ var MySimulator = {
         all(){
             DrawToothAppliance.setColorHigher(MySimulator.selected_color);
             DrawToothAppliance.setColorBottom(MySimulator.selected_color);
-            DrawToothAppliance.prepare();
+            DrawToothAppliance.draw();
         },
         
         // Metodo para colorir a parte superior do aparelho
         higher(even = false, odd = false){
             DrawToothAppliance.setColorHigher(MySimulator.selected_color);
-            DrawToothAppliance.prepare();
+            DrawToothAppliance.draw();
         },
 
         // Metodo para colorir a parte inferir o aparelho
         bottom(even = false, odd = false){
             DrawToothAppliance.setColorBottom(MySimulator.selected_color);
-            DrawToothAppliance.prepare();
+            DrawToothAppliance.draw();
         },
 
         // Metodo para colorir a borracha par
         even(){
             DrawToothAppliance.setColorHigher(MySimulator.selected_color, true);
             DrawToothAppliance.setColorBottom(MySimulator.selected_color, true);
-            DrawToothAppliance.prepare();
+            DrawToothAppliance.draw();
         },
         
         // Metodo para colorir a borracha impar
         odd(){
             DrawToothAppliance.setColorHigher(MySimulator.selected_color, false, true);
             DrawToothAppliance.setColorBottom(MySimulator.selected_color, false, true);
-            DrawToothAppliance.prepare();
+            DrawToothAppliance.draw();
         },
 
         // Metodo para selecionar a cor
@@ -393,10 +431,8 @@ var MySimulator = {
         // Carregar as opções de colorir a região do aparelho de dente
         MySimulator.interface.loadToothApplianceRegion();
 
-        // Carregando as borrachas 
-        //MySimulator.interface.rubber();
-
-        DrawToothAppliance.prepare();
+        // Carregando o desenho
+        DrawToothAppliance.draw();
         
     }
 }

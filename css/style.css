@@ -68,11 +68,10 @@ div#image_tooth_simulation {
     margin: 20px auto auto auto;
     border: 1px solid rgba(0,0,0,.5);
     background-color: var(--corHouver);
+    padding: 20px;
 }
 
 canvas#tooth_face {
     display: block;
-    width: 100%;
-    min-width: 200px;
     margin: auto;
 }
