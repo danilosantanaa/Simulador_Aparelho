@@ -263,7 +263,7 @@ var DrawToothAppliance = {
     // Metodo para cerragar todas configuração
     draw(){
         DrawToothAppliance.prepare();
-        DrawToothAppliance.onclickCanvas("Ola");
+        DrawToothAppliance.onclickCanvas();
     }
 
 

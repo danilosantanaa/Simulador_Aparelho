@@ -52,8 +52,7 @@ div#tooth_appliance_region > div.region_tooth {
     color: white;
     margin: 5px;
     margin-right: 20px;
-    border-top-left-radius: 50px;
-    border-bottom-right-radius: 50px;
+    border-radius: 10px;
     box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.219);
     cursor: pointer;
 }
