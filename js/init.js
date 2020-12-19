@@ -2,10 +2,6 @@
 let div_option_color = document.querySelector("#palette");
 let div_tooth_appliance_region = document.querySelector("#tooth_appliance_region");
 
-// Pegando o elemento div que irá representar as borrachas
-let div_higher_ID = document.querySelector("#higher_ID");
-let div_bottom_ID = document.querySelector("#bottom_ID");
-
 // Criando objeto para manipular a canvas do HTML
 var DrawToothAppliance = {
     width: 400,
@@ -169,7 +165,7 @@ var DrawToothAppliance = {
             }
 
             // Desenhando a imagem da modela com aparelho de dente
-            DrawToothAppliance.context.drawImage(DrawToothAppliance.imgObject, 0, 0, 400, 200);
+            DrawToothAppliance.context.drawImage(DrawToothAppliance.imgObject, 0, 0, DrawToothAppliance.width, DrawToothAppliance.height);
             
             // Aplicando o desenho no canva
             DrawToothAppliance.context.stroke();
@@ -274,7 +270,7 @@ var MySimulator = {
             for(list_color in MySimulator.lists_color){
                let div = MySimulator.interface.addElements("div", div_option_color, {
                    class: "color_bracket",
-                   onclick: `MySimulator.action.selectColor('${list_color}', ${pos_div})`
+                   onclick: `MySimulator.action.selectColor('${list_color}', ${pos_div})`,
                });
               
                // Mudando a propriedade style da tag
