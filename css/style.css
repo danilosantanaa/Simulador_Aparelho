@@ -67,7 +67,7 @@ div#image_tooth_simulation {
     position: relative;
     margin: 20px auto auto auto;
     border: 1px solid rgba(0,0,0,.5);
-    background-color: var(--corHouver);
+    /*background-color: var(--corHouver); */
     padding: 20px;
 }
 

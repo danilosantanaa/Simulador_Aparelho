@@ -241,6 +241,8 @@ var DrawToothAppliance = {
                 y: evt.clientY - recNav.top
             };
 
+            console.log(posClick);
+
             // Verificando e quais borrachas a cor pode ser atendida
             for(region in DrawToothAppliance.coords_rubber){
                 // Percorrendo as superficies, tanto de cima como na parte de baixo
@@ -253,6 +255,7 @@ var DrawToothAppliance = {
                         DrawToothAppliance.draw();
                     }
                 }
+
             }
         };
     },
