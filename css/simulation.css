@@ -21,10 +21,12 @@ h2 {
 }
 
 div#simulation p {
-    text-align: center;
-    background: linear-gradient(to right, var(--corGray), transparent);
+    text-align: justify;
+    border-left: 10px solid green;
+    /* border-bottom: 2px solid green; */
     padding: 5px;
-    border-radius: 10px;
+    border-radius: 2px;
+    background-color: rgba(0, 0, 0, 0.082);
 }
 
 div#option_color {
