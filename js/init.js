@@ -191,7 +191,7 @@ var DrawToothAppliance = {
             // Mostrando o simulador quando for carregado
             DrawToothAppliance.is_load = true;
             if(DrawToothAppliance.is_load) {
-                let div_load = document.querySelector("#load_img").style.display = "none";
+                document.querySelector("#load_img").style.display = "none";
             }
 
 
