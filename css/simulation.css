@@ -70,6 +70,17 @@ div#image_tooth_simulation {
     padding: 20px;
 }
 
+div#image_tooth_simulation div#load_img {
+    display: block;
+    width: 100%;
+    min-height: 200px;
+    text-align: center;
+    background-image: url('../img/load.gif');
+    background-repeat: no-repeat;
+    background-size: 100px 100px;
+    background-position: 50% 50%;
+}
+
 canvas#tooth_face {
     display: block;
     width: 100%;

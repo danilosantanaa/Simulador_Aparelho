@@ -4,6 +4,7 @@ let div_tooth_appliance_region = document.querySelector("#tooth_appliance_region
 
 // Criando objeto para manipular a canvas do HTML
 var DrawToothAppliance = {
+    is_load_simulador: false, // Varificar se o simulador foi carregado
     width: 400,
     height: 200,
     canvas: undefined, // Guarda o elemento canvas para a criação dos eventos
@@ -153,6 +154,9 @@ var DrawToothAppliance = {
 
         DrawToothAppliance.imgObject.onload = () => {
 
+            // Mundando o status como o simulador carregado
+            DrawToothAppliance.is_load_simulador = true;
+
             // Fazendo os desenho das borrachas da parte superior
             let higher_coords = DrawToothAppliance.coords_rubber.higher;
             for(rubber in higher_coords){
@@ -296,7 +300,20 @@ var DrawToothAppliance = {
 
     // Metodo para cerragar todas configuração
     draw(){
+        // Caso a imagens ainda não tenha sido  carregada mostrar um imagens de carregamento
+        if(!DrawToothAppliance.is_load_simulador){
+            let image_tooth_simulation = document.getElementById("image_tooth_simulation");
+            let div_load = MySimulator.interface.addElements("div", image_tooth_simulation, {
+                id: "load_img"
+            });
+
+            div_load.innerHTML = "Carregando o simulador...";
+        }
+
+        // Carregando o simulador
         DrawToothAppliance.prepare();
+
+        // DrawToothAppliance.prepare();
         DrawToothAppliance.onclickCanvas();
     }
 
