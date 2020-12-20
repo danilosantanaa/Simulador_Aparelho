@@ -35,6 +35,22 @@ div#option_color div.option {
     border: 1px solid rgba(0,0,0,.5);
 }
 
+#color_selected {
+    display: block;
+    background-color: var(--corHouver);
+    color: #fff;
+    padding: 10px;
+    text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.219);
+    text-align: center;
+    transition: ease-out .5s;
+}
+
+.border_option_radius {
+    border-top-right-radius: 50px;
+    border-top-left-radius: 50px;
+    margin-bottom: -1px;
+}
+
 div#option_color > div.option > div#palette > div.color_bracket {
     display: inline-block;
     width: 50px;
@@ -43,6 +59,7 @@ div#option_color > div.option > div#palette > div.color_bracket {
     margin: 4px;
     border: 1px solid rgba(0, 0, 0, 0.219);
     cursor: pointer;
+    transition: ease-in-out .5s;
 }
 
 div#tooth_appliance_region > div.region_tooth {
@@ -63,8 +80,7 @@ div#tooth_appliance_region > div.region_tooth:hover {
 
 div#image_tooth_simulation {
     display: none;
-    max-width: 900px;
-    position: relative;
+    max-width: 700px;
     margin: 20px auto auto auto;
     border: 1px solid rgba(0,0,0,.5);
     /*background-color: var(--corHouver); */
@@ -85,5 +101,6 @@ div#image_tooth_simulation {
 canvas#tooth_face {
     display: block;
     width: 100%;
+    height: 100%;
     margin: auto;
 }

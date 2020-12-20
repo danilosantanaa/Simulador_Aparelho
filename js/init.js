@@ -338,21 +338,64 @@ var MySimulator = {
     // Atributos
     selected_color: undefined,
     lists_color: {
-        yellow: "#FFEA02", // Amarelo
-        lilac: "#c8a2c8", // Lilás
-        orange: "#FF5100", // Laranja
-        rose: "#FF86B7", // Rosa
-        purple: "#993399", // Roxo 
-        grape: "#CE27BD", // Uva
-        green: "#2FB15D", // Verde
-        pearl_green: "#0A705C", // Verde Perola
-        green_lemon: "#B6E908", // Verde Limão
-        grey: "#72756B", // Cinza
-        blue: "#008FE9", // Azul
-        white: "#FFFFFF", // Branco
-        red: "#FF0101", // Vermelho
-        black: "#000000" // Preto
+        yellow: {
+            title: "Amarelo",
+            color: "#FFEA02"
+        },
+        lilac: {
+            title: "Lilás",
+            color: "#c8a2c8"
+        }, 
+        orange: {
+            title: "Laranja",
+            color: "#FF5100"
+        },
+        rose: {
+            title: "Rosa",
+            color: "#FF86B7"
+        },
+        purple: {
+            title: "Roxo",
+            color: "#993399"
+        }, 
+        grape: {
+            title: "Uva",
+            color: "#CE27BD"
+        },
+        green: {
+            title: "Verde",
+            color: "#2FB15D"
+        },
+        pearl_green: {
+            title: "Verde Perola",
+            color: "#0A705C"
+        },
+        green_lemon: {
+            title: "Verde Limão",
+            color: "#B6E908"
+        },
+        grey: {
+            title: "Cinza",
+            color: "#72756B"
+        }, 
+        blue: {
+            title: "Azul",
+            color: "#008FE9"
+        },  
+        white: {
+            title: "Branco",
+            color: "#FFFFFF"
+        }, 
+        red: {
+            title: "Vermelho",
+            color: "#FF0101"
+        }, 
+        black: {
+            title: "Preto",
+            color: "#000000"
+        }
     },
+
     tooth_appliance_region: [ 
         "Todas",
         "Superiores",
@@ -381,7 +424,7 @@ var MySimulator = {
                });
               
                // Mudando a propriedade style da tag
-               div.style.background = MySimulator.lists_color[list_color]; 
+               div.style.background = MySimulator.lists_color[list_color].color;
 
                pos_div++;
             }
@@ -490,15 +533,30 @@ var MySimulator = {
                 
                 if(pos == posDiv){
                     border = "4px dashed #25e7e7";
+                    div_color_bracket[pos].style.marginLeft = "0px";
+                    div_color_bracket[pos].style.marginRight = "0px";
                 }else {
                     border = "1px solid rgba(0, 0, 0, 0.219)";
+                    div_color_bracket[pos].style.marginLeft = "4px";
+                    div_color_bracket[pos].style.marginRight = "4px";
                 }
 
                 div_color_bracket[pos].style.border = border;
             }
 
-            MySimulator.selected_color = MySimulator.lists_color[posColor];
+            // Guardando a cor selecionada
+            MySimulator.selected_color = MySimulator.lists_color[posColor].color;
 
+            // Mostrando a cor selecionada e o nome da cor que foi selecionada
+            let div_color_selected = document.getElementById("color_selected");
+            div_color_selected.innerHTML = MySimulator.lists_color[posColor].title;
+            div_color_selected.style.background = MySimulator.lists_color[posColor].color;
+
+            if(MySimulator.lists_color.white.title == MySimulator.lists_color[posColor].title){
+                div_color_selected.style.color = "#000000";
+            } else {
+                div_color_selected.style.color = "#ffffff";
+            }
         }
     },
 
