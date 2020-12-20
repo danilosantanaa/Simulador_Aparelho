@@ -270,8 +270,6 @@ var DrawToothAppliance = {
 
             // Pegando o tamanho do elementos que aumenta dinamicamente
             let tooth_face = document.getElementById("tooth_face");
-            let widthElement = tooth_face.clientWidth;
-            let heightElement = tooth_face.clientHeight;
 
             /*
             * A variável pctX e pctY fica responsável por guardar a porcentagem relativa
@@ -279,8 +277,8 @@ var DrawToothAppliance = {
             * carteseano X e Y da imagens foi mudada e com isso permite que a cor seja aplicada da forma correta.
             * Basicamente esse algoritmo identifica onde está a borracha do aparelho de dentes.
             */
-            let pctX =  widthElement * 100 / DrawToothAppliance.width;
-            let pctY =  heightElement * 100 / DrawToothAppliance.height;
+            let pctX =   tooth_face.clientWidth * 100 / DrawToothAppliance.width;
+            let pctY =  tooth_face.clientHeight * 100 / DrawToothAppliance.height;
 
             
             console.log("Monstrando logs...");
@@ -413,9 +411,10 @@ var MySimulator = {
             */
 
             // Definir a cor padrão de seleção que no caso será amarelo
-            MySimulator.selected_color = MySimulator.lists_color.yellow;
+            MySimulator.selected_color = MySimulator.lists_color.yellow.color;
 
-            let pos_div = 0; // Variável para contar as posição da divs
+            // Variável para contar as posição da divs
+            let pos_div = 0; 
 
             for(list_color in MySimulator.lists_color){
                let div = MySimulator.interface.addElements("div", div_option_color, {
@@ -428,6 +427,10 @@ var MySimulator = {
 
                pos_div++;
             }
+
+            // Chamada a metodo para selecionar a cor padrão
+            MySimulator.interface.changeColorSelected(MySimulator.lists_color.yellow);
+            MySimulator.interface.changePaletteStatus(document.querySelector(".color_bracket"), true);
         },
 
         // Metodo responsável por mostrar as opção onde a cor será aplicada
@@ -465,6 +468,36 @@ var MySimulator = {
 
             return child;
         },
+
+        // Metodo para mostrar a cor selecionada
+        changeColorSelected(DataColor){
+            // Mostrando a cor selecionada e o nome da cor que foi selecionada
+            let div_color_selected = document.getElementById("color_selected");
+            div_color_selected.innerHTML = DataColor.title;
+            div_color_selected.style.background = DataColor.color;
+
+            if(MySimulator.lists_color.white.title == DataColor.title){
+                div_color_selected.style.color = "#000000";
+            } else {
+                div_color_selected.style.color = "#ffffff";
+            }
+        },
+
+        // Metodo que para desenhar uma bordar em torno de uma paleta de cor espeficiar
+        changePaletteStatus(tag, is_change = false){
+            let border;
+            if(is_change){
+                border = "4px dashed #25e7e7";
+                tag.style.marginLeft = "0px";
+                tag.style.marginRight = "0px";
+            }else {
+                border = "1px solid rgba(0, 0, 0, 0.219)";
+                tag.style.marginLeft = "4px";
+                tag.style.marginRight = "4px";
+            }
+
+            tag.style.border = border;
+        }
 
     },
 
@@ -527,36 +560,17 @@ var MySimulator = {
         // Metodo para selecionar a cor
         selectColor(posColor, posDiv){
             let div_color_bracket =  document.querySelectorAll(".color_bracket");
-            let border;
 
             for(let pos = 0; pos < div_color_bracket.length; pos++){
-                
-                if(pos == posDiv){
-                    border = "4px dashed #25e7e7";
-                    div_color_bracket[pos].style.marginLeft = "0px";
-                    div_color_bracket[pos].style.marginRight = "0px";
-                }else {
-                    border = "1px solid rgba(0, 0, 0, 0.219)";
-                    div_color_bracket[pos].style.marginLeft = "4px";
-                    div_color_bracket[pos].style.marginRight = "4px";
-                }
-
-                div_color_bracket[pos].style.border = border;
+                MySimulator.interface.changePaletteStatus(div_color_bracket[pos], pos == posDiv);
             }
 
             // Guardando a cor selecionada
             MySimulator.selected_color = MySimulator.lists_color[posColor].color;
 
             // Mostrando a cor selecionada e o nome da cor que foi selecionada
-            let div_color_selected = document.getElementById("color_selected");
-            div_color_selected.innerHTML = MySimulator.lists_color[posColor].title;
-            div_color_selected.style.background = MySimulator.lists_color[posColor].color;
+            MySimulator.interface.changeColorSelected(MySimulator.lists_color[posColor]);
 
-            if(MySimulator.lists_color.white.title == MySimulator.lists_color[posColor].title){
-                div_color_selected.style.color = "#000000";
-            } else {
-                div_color_selected.style.color = "#ffffff";
-            }
         }
     },
 
