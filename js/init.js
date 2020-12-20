@@ -7,7 +7,6 @@ var DrawToothAppliance = {
     is_load: false,
     width: 400,
     height: 200,
-    div_load_canvas: document.getElementById("image_tooth_simulation"),
     canvas: undefined, // Guarda o elemento canvas para a criação dos eventos
     context:  undefined, //document.getElementById("tooth_face").getContext("2d"), // Salva o tipo de contexo de desenho
     sourceImg: "img/aparelho.png", // O nome da imagens que representa o aparelho de dente
@@ -160,11 +159,13 @@ var DrawToothAppliance = {
 
     // Metodo para carregar o desenho
     prepare(){
-
         DrawToothAppliance.showLoad();
         DrawToothAppliance.canvas = DrawToothAppliance.createCanvas(); // Pegando o elemento canva criado
         DrawToothAppliance.context = DrawToothAppliance.canvas.getContext("2d");
-        DrawToothAppliance.div_load_canvas.style.display = "block";
+
+        // Mundando visibilidade
+        let div_image_tooth_simulation = document.querySelector("#image_tooth_simulation");
+        div_image_tooth_simulation.style.display = "none";
 
         DrawToothAppliance.imgObject.onload = () => {
             // Fazendo os desenho das borrachas da parte superior
@@ -188,11 +189,14 @@ var DrawToothAppliance = {
             DrawToothAppliance.context.stroke();
 
             // Mostrando o simulador quando for carregado
-            DrawToothAppliance.div_load_canvas.style.display = "block";
             DrawToothAppliance.is_load = true;
             if(DrawToothAppliance.is_load) {
                 let div_load = document.querySelector("#load_img").style.display = "none";
             }
+
+
+            // Mostrando a div apos a imagens ser carregada
+            div_image_tooth_simulation.style.display = "block";
         };
 
         // Carregando a Imagem
