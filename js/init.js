@@ -4,8 +4,10 @@ let div_tooth_appliance_region = document.querySelector("#tooth_appliance_region
 
 // Criando objeto para manipular a canvas do HTML
 var DrawToothAppliance = {
+    is_load: false,
     width: 400,
     height: 200,
+    div_load_canvas: document.getElementById("image_tooth_simulation"),
     canvas: undefined, // Guarda o elemento canvas para a criação dos eventos
     context:  undefined, //document.getElementById("tooth_face").getContext("2d"), // Salva o tipo de contexo de desenho
     sourceImg: "img/aparelho.png", // O nome da imagens que representa o aparelho de dente
@@ -134,7 +136,7 @@ var DrawToothAppliance = {
 
     // Criando o elemento canva do HTML tooth_face
     createCanvas(){
-        let image_tooth_simulation = document.getElementById("image_tooth_simulation");
+        let image_tooth_simulation = DrawToothAppliance.div_load_canvas;
         image_tooth_simulation.innerHTML = "";
         let canvas = MySimulator.interface.addElements("canvas", image_tooth_simulation, {
             width: DrawToothAppliance.width,
@@ -145,14 +147,26 @@ var DrawToothAppliance = {
         return canvas;
     },
 
+    // Metodo que irá mostrar um botão de load para o usuário enquanto o canva não for carregado
+    showLoad(){
+        if(!DrawToothAppliance.is_load){
+            let div_show_simulation = document.getElementById("show_simulation");
+            let div_load = MySimulator.interface.addElements("div", div_show_simulation, {
+                id: "load_img"
+            }, true);
+            div_load.innerHTML = "Carregando o simulador ...";
+        }
+    },
+
     // Metodo para carregar o desenho
     prepare(){
-        DrawToothAppliance.canvas = DrawToothAppliance.createCanvas(); // Pegando o elemento canva criado
 
+        DrawToothAppliance.showLoad();
+        DrawToothAppliance.canvas = DrawToothAppliance.createCanvas(); // Pegando o elemento canva criado
         DrawToothAppliance.context = DrawToothAppliance.canvas.getContext("2d");
+        DrawToothAppliance.div_load_canvas.style.display = "block";
 
         DrawToothAppliance.imgObject.onload = () => {
-
             // Fazendo os desenho das borrachas da parte superior
             let higher_coords = DrawToothAppliance.coords_rubber.higher;
             for(rubber in higher_coords){
@@ -167,11 +181,18 @@ var DrawToothAppliance = {
                 DrawToothAppliance.context.fillRect(bottom_coords[rubber].x, bottom_coords[rubber].y, bottom_coords[rubber].w, bottom_coords[rubber].h);
             }
 
-             // Desenhando a imagem da modela com aparelho de dente
-             DrawToothAppliance.context.drawImage(DrawToothAppliance.imgObject, 0, 0, DrawToothAppliance.width, DrawToothAppliance.height);
+            // Desenhando a imagem da modela com aparelho de dente
+            DrawToothAppliance.context.drawImage(DrawToothAppliance.imgObject, 0, 0, DrawToothAppliance.width, DrawToothAppliance.height);
             
             // Aplicando o desenho no canva
             DrawToothAppliance.context.stroke();
+
+            // Mostrando o simulador quando for carregado
+            DrawToothAppliance.div_load_canvas.style.display = "block";
+            DrawToothAppliance.is_load = true;
+            if(DrawToothAppliance.is_load) {
+                let div_load = document.querySelector("#load_img").style.display = "none";
+            }
         };
 
         // Carregando a Imagem
@@ -233,6 +254,8 @@ var DrawToothAppliance = {
     // Evento para manipular a cor da borracha de forma  personazada pelo usuario
     onclickCanvas(){
         DrawToothAppliance.canvas.onclick = (evt) => {
+
+            // Pegando a dimensão atual do canva
             let recNav = DrawToothAppliance.canvas.getBoundingClientRect();
 
             // Capturando o click do usuario
@@ -298,8 +321,6 @@ var DrawToothAppliance = {
     draw(){
         // Carregando o simulador
         DrawToothAppliance.prepare();
-
-        // DrawToothAppliance.prepare();
         DrawToothAppliance.onclickCanvas();
     }
 
@@ -373,13 +394,23 @@ var MySimulator = {
         },
 
         // Metodo para criar elementos e adicionar na DOM
-        addElements(element, tagDad, atrributes = []){
+        addElements(element, tagDad, atrributes = [], first = false){
             let child = document.createElement(element);
             // Adicionando os atributos na tags quando for necessarios
             for(atrribute in atrributes){
                 child.setAttribute(atrribute, atrributes[atrribute]);
             }
-            tagDad.appendChild(child);
+
+            // Adiciona na ultima posição
+            if(!first){
+                tagDad.appendChild(child);
+            } else {
+
+                // Caso o usuário queira adicionar elemento na primeira posicao
+                let firstChild = tagDad.firstChild;
+                tagDad.insertBefore(child, firstChild);
+            }
+            
 
             return child;
         },
@@ -481,3 +512,5 @@ var MySimulator = {
 document.addEventListener("DOMContentLoaded", () => {
     MySimulator.init();
 });
+
+

@@ -62,6 +62,7 @@ div#tooth_appliance_region > div.region_tooth:hover {
 }
 
 div#image_tooth_simulation {
+    display: block;
     max-width: 900px;
     position: relative;
     margin: 20px auto auto auto;
@@ -70,7 +71,7 @@ div#image_tooth_simulation {
     padding: 20px;
 }
 
-div#image_tooth_simulation div#load_img {
+#load_img {
     display: block;
     width: 100%;
     min-height: 200px;
