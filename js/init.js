@@ -135,7 +135,7 @@ var DrawToothAppliance = {
 
     // Criando o elemento canva do HTML tooth_face
     createCanvas(){
-        let image_tooth_simulation = DrawToothAppliance.div_load_canvas;
+        let image_tooth_simulation =  document.querySelector("#image_tooth_simulation");;
         image_tooth_simulation.innerHTML = "";
         let canvas = MySimulator.interface.addElements("canvas", image_tooth_simulation, {
             width: DrawToothAppliance.width,
