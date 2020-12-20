@@ -520,5 +520,3 @@ var MySimulator = {
 document.addEventListener("DOMContentLoaded", () => {
     MySimulator.init();
 });
-
-
