@@ -368,6 +368,10 @@ var MySimulator = {
             /*
             * Aqui irá manipular a DOM do HTML para que possar colocar as colores dinamicamente
             */
+
+            // Definir a cor padrão de seleção que no caso será amarelo
+            MySimulator.selected_color = MySimulator.lists_color.yellow;
+
             let pos_div = 0; // Variável para contar as posição da divs
 
             for(list_color in MySimulator.lists_color){
