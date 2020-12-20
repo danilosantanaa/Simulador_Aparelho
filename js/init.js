@@ -135,7 +135,7 @@ var DrawToothAppliance = {
 
     // Criando o elemento canva do HTML tooth_face
     createCanvas(){
-        let image_tooth_simulation =  document.querySelector("#image_tooth_simulation");;
+        let image_tooth_simulation =  document.querySelector("#image_tooth_simulation");
         image_tooth_simulation.innerHTML = "";
         let canvas = MySimulator.interface.addElements("canvas", image_tooth_simulation, {
             width: DrawToothAppliance.width,
@@ -148,12 +148,19 @@ var DrawToothAppliance = {
 
     // Metodo que irá mostrar um botão de load para o usuário enquanto o canva não for carregado
     showLoad(){
+        // Mundando visibilidade
+        let div_image_tooth_simulation = document.querySelector("#image_tooth_simulation");
+
         if(!DrawToothAppliance.is_load){
             let div_show_simulation = document.getElementById("show_simulation");
             let div_load = MySimulator.interface.addElements("div", div_show_simulation, {
                 id: "load_img"
             }, true);
             div_load.innerHTML = "Carregando o simulador ...";
+
+            div_image_tooth_simulation.style.display = "none";
+        } else {
+            div_image_tooth_simulation.style.display = "block";
         }
     },
 
@@ -162,11 +169,8 @@ var DrawToothAppliance = {
         DrawToothAppliance.showLoad();
         DrawToothAppliance.canvas = DrawToothAppliance.createCanvas(); // Pegando o elemento canva criado
         DrawToothAppliance.context = DrawToothAppliance.canvas.getContext("2d");
-
-        // Mundando visibilidade
-        let div_image_tooth_simulation = document.querySelector("#image_tooth_simulation");
-        div_image_tooth_simulation.style.display = "none";
-
+ 
+        // Quando a imagens do canva for carregado
         DrawToothAppliance.imgObject.onload = () => {
             // Fazendo os desenho das borrachas da parte superior
             let higher_coords = DrawToothAppliance.coords_rubber.higher;
@@ -194,9 +198,7 @@ var DrawToothAppliance = {
                 document.querySelector("#load_img").style.display = "none";
             }
 
-
-            // Mostrando a div apos a imagens ser carregada
-            div_image_tooth_simulation.style.display = "block";
+            DrawToothAppliance.showLoad();
         };
 
         // Carregando a Imagem
@@ -502,7 +504,6 @@ var MySimulator = {
     },
 
     action: {
-
         // Metodo que irá controlar os botao
         buttom(posRegion){
             switch(MySimulator.tooth_appliance_region[posRegion]){
@@ -520,7 +521,6 @@ var MySimulator = {
                 break;
                 case "Impares":
                     MySimulator.action.odd();
-
             }
         },
 

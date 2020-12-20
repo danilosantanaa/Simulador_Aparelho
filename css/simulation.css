@@ -7,9 +7,8 @@
     --corHouver:  #060058;
     --corGray: #cecece;
     --font: 'Roboto', sans-serif;
+    --max-width: 1000px;
 }
-
-
 
 * {
     font-family: var(--font);
@@ -21,12 +20,14 @@ h2 {
 }
 
 div#simulation p {
+    max-width: var(--max-width);
     text-align: justify;
     border-left: 10px solid green;
     /* border-bottom: 2px solid green; */
     padding: 5px;
     border-radius: 2px;
     background-color: rgba(0, 0, 0, 0.082);
+    margin: auto auto 10px auto;
 }
 
 div#option_color {
@@ -53,6 +54,17 @@ div#option_color div.option {
     margin-bottom: -1px;
 }
 
+.option_max_width {
+    max-width: var(--max-width);
+    margin: auto;
+}
+
+.option_buttom {
+    display: block;
+    padding: 10px;
+    font-weight: bolder;
+}
+
 div#option_color > div.option > div#palette > div.color_bracket {
     display: inline-block;
     width: 50px;
@@ -62,6 +74,11 @@ div#option_color > div.option > div#palette > div.color_bracket {
     border: 1px solid rgba(0, 0, 0, 0.219);
     cursor: pointer;
     transition: ease-in-out .5s;
+}
+
+div#tooth_appliance_region {
+    display: block;
+    max-width: var(--max-width);
 }
 
 div#tooth_appliance_region > div.region_tooth {
@@ -82,11 +99,13 @@ div#tooth_appliance_region > div.region_tooth:hover {
 
 div#image_tooth_simulation {
     display: none;
-    max-width: 700px;
+    max-width: var(--max-width);
     margin: 20px auto auto auto;
     border: 1px solid rgba(0,0,0,.5);
-    /*background-color: var(--corHouver); */
-    padding: 20px;
+    /*background-color: var(--corHouver);*/
+    padding: 10px;
+    transition: ease-out all .1s;
+    box-shadow: 3px 3px 4px rgba(0, 0, 0, 0.219);
 }
 
 #load_img {
@@ -105,4 +124,27 @@ canvas#tooth_face {
     width: 100%;
     height: 100%;
     margin: auto;
+}
+
+
+@media only screen and (max-width: 426px) {
+    div#tooth_appliance_region > div.region_tooth {
+        padding: 20px;
+        margin: 5px;
+        margin-right: auto;
+    }
+  }
+
+@media only screen and (max-width: 368px) {
+    div#tooth_appliance_region > div.region_tooth {
+        padding: 15px;
+        margin: 5px;
+    }
+}
+
+@media only screen and (max-width: 343px){
+    div#tooth_appliance_region > div.region_tooth {
+        padding: 10px;
+        margin: 4px;
+    }
 }

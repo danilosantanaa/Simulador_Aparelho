@@ -1,7 +1,7 @@
 # Simulador_Aparelho
  Simulador de Aparelho de dentes, onde poderá personalizar a cor do aparelho
 
- > Como Instalar?
+ > Como Instalar? <
 Para Instalar primeiramente você precisa criar uma página HTML e colocar a seguinte estrutura:
 
 """
