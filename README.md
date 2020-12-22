@@ -1,5 +1,5 @@
-# Simulador_Aparelho
- Simulador de Aparelho de dentes, onde poderá personalizar a cor do aparelho
+# Simulador de Aparelho odontologico
+ Simulador de Aparelho de dentes, onde poderá personalizar a cor do aparelho do aparelho. Isso facilita com que o usuário possa personalizar seu aparelho.
 
 ## Como Instalar? 
 Para Instalar primeiramente você precisa criar uma página HTML e colocar a seguinte estrutura:
@@ -53,8 +53,7 @@ simulador.
 ## Configurando o caminho da imagem
 
 ### Representação do aparelho de dente
-Caso você queira carregar a imagem que representa o aparelho de dente que estejaem outro local, dentro do arquivo init.js basta alterar:
-local:
+Caso você queira carregar a imagem que representa o aparelho de dente que esteja em outro local, dentro do arquivo init.js basta alterar:
 
 ```
 var DrawToothAppliance = {
@@ -64,8 +63,7 @@ var DrawToothAppliance = {
 ```
 
 ### Representação da tela de loading (carregamento)
-Caso você queira carregar a imagem que representa a imagem de loading e que estejaem outro local, dentro do arquivo init.js basta alterar:
-local:
+Caso você queira carregar a imagem que representa a imagem de loading e que esteja em outro local, dentro do arquivo init.js basta alterar:
 
 ```
 var DrawToothAppliance = {
