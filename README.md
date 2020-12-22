@@ -45,7 +45,7 @@ Para carregar o css, basta inserir o seguinte código na área header do documen
 ```
 
 ## Carregar o script
-No final do documento apos &lt;body&gt; carregue o documento de script que é responsável de dá vida ao
+No final do documento apos &lt;/body&gt; carregue o documento de script que é responsável de dá vida ao
 simulador.
 ```
 <script src="js/init.js"></script>
