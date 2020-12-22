@@ -5,7 +5,10 @@
 Para Instalar primeiramente você precisa criar uma página HTML e colocar a seguinte estrutura:
 
 ```<div id="simulation">
+        <!-- A tag h2 "Simulador de aparelho não é obrigatoria -->
         <h2>Simulador de Aparelho</h2>
+
+        <!-- DIV obrigatoria para o funcionamento -->
         <!-- Aqui mostra as opção de cores -->
         <div id="option_color">
             <p><strong><span class="material-icons">description</span> instrução:</strong> Basta selecionar a cor e depois apertar na opção que deseja colorir. Você também pode escolher uma cor qualquer e depois clicar em cima do bracket para colorir a borracha do aparelho.</p>
@@ -35,20 +38,22 @@ Para Instalar primeiramente você precisa criar uma página HTML e colocar a seg
     </div>
 ```
 ## Carregando o css
-Para carregar o css, basta inserir o seguinte código na área header do documento HTML esses dois arquivos são necessários para que a formatação seja exibida de forma correta.
+Para carregar o css, basta inserir o seguinte código na área header do documento HTML. esses dois arquivos são necessários para que a formatação seja exibida da forma correta.
 ```
 <link rel="stylesheet" href="css/simulation.css">
 <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 ```
 
 ## Carregar o script
-No final do documento, após o </body> carregue o documento de script que é responsável de dá vida ao
+No final do documento apos &lt;body&gt; carregue o documento de script que é responsável de dá vida ao
 simulador.
 ```
 <script src="js/init.js"></script>
 ```
+## Configurando o caminho da imagem
 
-Caso você queira carregar a imagem que representa o aparelho de dente em outro local do arquivo, dentro do arquivo init.js no
+### Representação do aparelho de dente
+Caso você queira carregar a imagem que representa o aparelho de dente que estejaem outro local, dentro do arquivo init.js basta alterar:
 local:
 
 ```
@@ -58,4 +63,15 @@ var DrawToothAppliance = {
     ...
 ```
 
- Veja a demontração [acessando aqui](https://danilosantana240765.github.io/Simulador_Aparelho/)
+### Representação da tela de loading (carregamento)
+Caso você queira carregar a imagem que representa a imagem de loading e que estejaem outro local, dentro do arquivo init.js basta alterar:
+local:
+
+```
+var DrawToothAppliance = {
+    ...
+    sourceLoad: "img/load.gif", // Imagem de load
+    ...
+```
+
+ Veja a demontração: [acessando aqui](https://danilosantana240765.github.io/Simulador_Aparelho/)

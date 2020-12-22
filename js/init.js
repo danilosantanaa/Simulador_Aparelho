@@ -10,6 +10,7 @@ var DrawToothAppliance = {
     canvas: undefined, // Guarda o elemento canvas para a criação dos eventos
     context:  undefined, //document.getElementById("tooth_face").getContext("2d"), // Salva o tipo de contexo de desenho
     sourceImg: "img/aparelho.png", // O nome da imagens que representa o aparelho de dente
+    sourceLoad: "img/load.gif", // Imagem de load
     imgObject: new Image(), // O Objeto de Imagens para auxiliar no desenho da imagem
 
     coords_rubber: {
@@ -157,8 +158,8 @@ var DrawToothAppliance = {
             let div_load = MySimulator.interface.addElements("div", div_show_simulation, {
                 id: "load_img"
             }, true);
-            div_load.innerHTML = "Carregando o simulador ...";
-
+            div_load.innerHTML = "Carregando o simulador. Por favor aguarde ...";
+            div_load.style.backgroundImage = `url(${DrawToothAppliance.sourceLoad})`;
             div_image_tooth_simulation.style.display = "none";
         } else {
             div_image_tooth_simulation.style.display = "block";
