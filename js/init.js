@@ -150,9 +150,10 @@ var DrawToothAppliance = {
     showLoad(){
         // Mundando visibilidade
         let div_image_tooth_simulation = document.querySelector("#image_tooth_simulation");
+        let div_show_simulation = document.querySelector("#show_simulation");
 
+        // Caso não for carregap o simulador, mostra uma imagem de carregando
         if(!DrawToothAppliance.is_load){
-            let div_show_simulation = document.getElementById("show_simulation");
             let div_load = MySimulator.interface.addElements("div", div_show_simulation, {
                 id: "load_img"
             }, true);
@@ -161,13 +162,20 @@ var DrawToothAppliance = {
             div_image_tooth_simulation.style.display = "none";
         } else {
             div_image_tooth_simulation.style.display = "block";
+            if(div_show_simulation.firstChild != div_image_tooth_simulation)
+                MySimulator.interface.removeElements(div_show_simulation, true);
         }
     },
 
     // Metodo para carregar o desenho
     prepare(){
+        // Mostrar a tela de loading 
         DrawToothAppliance.showLoad();
-        DrawToothAppliance.canvas = DrawToothAppliance.createCanvas(); // Pegando o elemento canva criado
+
+        // Criando canvas
+        DrawToothAppliance.canvas = DrawToothAppliance.createCanvas();
+
+        // Adicionando contexto
         DrawToothAppliance.context = DrawToothAppliance.canvas.getContext("2d");
  
         // Quando a imagens do canva for carregado
@@ -194,10 +202,8 @@ var DrawToothAppliance = {
 
             // Mostrando o simulador quando for carregado
             DrawToothAppliance.is_load = true;
-            if(DrawToothAppliance.is_load) {
-                document.querySelector("#load_img").style.display = "none";
-            }
-
+            
+            // Mostrar o simulador
             DrawToothAppliance.showLoad();
         };
 
@@ -461,21 +467,34 @@ var MySimulator = {
             if(!first){
                 tagDad.appendChild(child);
             } else {
-
-                // Caso o usuário queira adicionar elemento na primeira posicao
-                let firstChild = tagDad.firstChild;
-                tagDad.insertBefore(child, firstChild);
+                tagDad.insertBefore(child, tagDad.firstChild);
             }
             
 
             return child;
         },
 
+        // Metodo para remover elemento da DOM
+        removeElements(tagDad, first = false){
+            try {
+                if(!first) {
+                    // Remover todos os elementos filhos
+                    while(tagDad.firstChild){
+                        tagDad.removeChild(tagDad.firstChild);
+                    }
+                } else {
+                    tagDad.removeChild(tagDad.firstChild);
+                }
+            } catch(e) {
+                console.error(`Erro ao remover elemento ${e.message}`);
+            }
+        },
+
         // Metodo para mostrar a cor selecionada
         changeColorSelected(DataColor){
             // Mostrando a cor selecionada e o nome da cor que foi selecionada
             let div_color_selected = document.getElementById("color_selected");
-            div_color_selected.innerHTML = DataColor.title;
+            div_color_selected.innerHTML = `<span class="material-icons">palette</span> ${DataColor.title}`;
             div_color_selected.style.background = DataColor.color;
 
             if(MySimulator.lists_color.white.title == DataColor.title){

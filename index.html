@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Simulador de aparelho</title>
     <link rel="stylesheet" href="css/simulation.css">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 </head>
 <body>
     <div id="simulation">
@@ -12,22 +13,22 @@
 
         <!-- Aqui mostra as opção de cores -->
         <div id="option_color">
-            <p>Basta selecionar a cor e depois apertar na opção que deseja colorir. Você também pode escolher uma cor qualquer e depois clicar em cima do bracket para colorir a borracha do aparelho </p>
+            <p><strong><span class="material-icons">description</span> instrução:</strong> Basta selecionar a cor e depois apertar na opção que deseja colorir. Você também pode escolher uma cor qualquer e depois clicar em cima do bracket para colorir a borracha do aparelho.</p>
            
             <!-- Mostrar a cor selecionada -->
             <div class="option border_option_radius option_max_width">
-                <div id="color_selected" class="border_option_radius">&ThinSpace;</div>
+                <div id="color_selected" class="border_option_radius"></div>
             </div>
 
             <!-- Aqui irá mostrar a paleta de cores -->
             <div class="option option_max_width">
-                <div class="option_buttom">Selecione uma cor</div>
+                <div class="option_buttom"><span class="material-icons">colorize</span> Selecione uma cor</div>
                 <div id="palette"></div>
             </div>
             
             <!-- Aqui irá mostrar as opção que o usuário poderá colorir as borrachas -->
             <div class="option option_max_width">
-                <div class="option_buttom">Opção de cor</div>
+                <div class="option_buttom"><span class="material-icons">apps</span> Opção de cor</div>
                 <div id="tooth_appliance_region"></div>
             </div>
         </div> 
