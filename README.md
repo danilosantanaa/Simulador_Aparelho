@@ -35,12 +35,27 @@ Para Instalar primeiramente você precisa criar uma página HTML e colocar a seg
     </div>
 ```
 ## Carregando o css
-Para carregar o css, basta inserir o seguinte código na área header do documento HTML.
+Para carregar o css, basta inserir o seguinte código na área header do documento HTML esses dois arquivos são necessários para que a formatação seja exibida de forma correta.
+```
 <link rel="stylesheet" href="css/simulation.css">
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+```
 
 ## Carregar o script
 No final do documento, após o </body> carregue o documento de script que é responsável de dá vida ao
 simulador.
+```
 <script src="js/init.js"></script>
+```
+
+Caso você queira carregar a imagem que representa o aparelho de dente em outro local do arquivo, dentro do arquivo init.js no
+local:
+
+```
+var DrawToothAppliance = {
+    ...
+    sourceImg: "<caminho do arquivo>", // O nome da imagens que representa o aparelho de dente
+    ...
+```
 
  Veja a demontração [acessando aqui](https://danilosantana240765.github.io/Simulador_Aparelho/)
