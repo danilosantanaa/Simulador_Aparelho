@@ -332,6 +332,13 @@ var DrawToothAppliance = {
         // Carregando o simulador
         DrawToothAppliance.prepare();
         DrawToothAppliance.onclickCanvas();
+    },
+
+    /**
+     * Metodo de configuração personalizada, onde por aqui poderá configurar o caminho da imagens
+     */
+    SetImagemSource(source){
+        DrawToothAppliance.sourceImg = source;
     }
 
 
