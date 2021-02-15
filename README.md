@@ -1,5 +1,5 @@
 # Simulador de Aparelho odontologico
- Simulador de Aparelho de dentes, onde poderá personalizar a cor do aparelho do aparelho. Isso facilita com que o usuário possa personalizar seu aparelho.
+ Simulador de Aparelho de dentes, onde poderá personalizar a cor do aparelho. Isso facilita com que o usuário possa personalizar seu aparelho.
 
 ## Como Instalar? 
 Para Instalar primeiramente você precisa criar uma página HTML e colocar a seguinte estrutura:
@@ -45,7 +45,7 @@ Para carregar o css, basta inserir o seguinte código na área header do documen
 ```
 
 ## Carregar o script
-No final do documento apos &lt;body&gt; carregue o documento de script que é responsável de dá vida ao
+No final do documento apos &lt;/body&gt; carregue o documento de script que é responsável de dá vida ao
 simulador.
 ```
 <script src="js/init.js"></script>
