@@ -72,4 +72,4 @@ var DrawToothAppliance = {
     ...
 ```
 
- Veja a demontração: [acessando aqui](https://danilosantana240765.github.io/Simulador_Aparelho/)
+ Veja a demontração: [acessando aqui](https://danilosantanaa.github.io/Simulador_Aparelho/)
