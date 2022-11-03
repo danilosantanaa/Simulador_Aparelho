@@ -4,7 +4,8 @@
 ## Como Instalar? 
 Para Instalar primeiramente você precisa criar uma página HTML e colocar a seguinte estrutura:
 
-```<div id="simulation">
+```html
+<div id="simulation">
         <!-- A tag h2 "Simulador de aparelho não é obrigatoria -->
         <h2>Simulador de Aparelho</h2>
 
@@ -39,7 +40,7 @@ Para Instalar primeiramente você precisa criar uma página HTML e colocar a seg
 ```
 ## Carregando o css
 Para carregar o css, basta inserir o seguinte código na área header do documento HTML. esses dois arquivos são necessários para que a formatação seja exibida da forma correta.
-```
+```html
 <link rel="stylesheet" href="css/simulation.css">
 <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 ```
@@ -47,7 +48,7 @@ Para carregar o css, basta inserir o seguinte código na área header do documen
 ## Carregar o script
 No final do documento apos &lt;/body&gt; carregue o documento de script que é responsável de dá vida ao
 simulador.
-```
+```html
 <script src="js/init.js"></script>
 ```
 ## Configurando o caminho da imagem
@@ -55,7 +56,7 @@ simulador.
 ### Representação do aparelho de dente
 Caso você queira carregar a imagem que representa o aparelho de dente que esteja em outro local, dentro do arquivo init.js basta alterar:
 
-```
+```javascript
 var DrawToothAppliance = {
     ...
     sourceImg: "<caminho do arquivo>", // O nome da imagens que representa o aparelho de dente
@@ -65,7 +66,7 @@ var DrawToothAppliance = {
 ### Representação da tela de loading (carregamento)
 Caso você queira carregar a imagem que representa a imagem de loading e que esteja em outro local, dentro do arquivo init.js basta alterar:
 
-```
+```javascript
 var DrawToothAppliance = {
     ...
     sourceLoad: "img/load.gif", // Imagem de load
